@@ -521,7 +521,7 @@
     .then(response => {
       if (response.ok) {
         feedbackDiv.innerHTML = `✅ Thanks ${name}! Your details have been sent to Beng See. I'll get back to you within 24 hours.`;
-        feedbackDiv.style.color = '#e11b22';
+        feedbackDiv.style.color = '#002855';
         form.reset();
       } else {
         throw new Error('Form submission failed.');
