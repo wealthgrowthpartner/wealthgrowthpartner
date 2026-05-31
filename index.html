@@ -172,6 +172,7 @@
       border: none;
       line-height: 1.5;
     }
+    /* New styling class to match header secondary text */
     .badge-secondary {
       color: #002855;
       opacity: 0.9;
@@ -344,7 +345,7 @@
         </span>
         <h2>Grow your wealth <br>with trusted guidance</h2>
         <p style="font-size: 1.1rem; margin: 1.2rem 0 1.8rem 0; max-width: 90%; color: #475569;">Professional service for Malaysians to build resilient financial future via unit trust investments and PRS tailored to your goals — whether saving for retirement, education, or passive income.</p>
-        <p style="font-weight: 600; color: #002855; margin-bottom: 1.5rem;">Your Goals, Our Focus</p>
+	<p>Your Goals, Our Focus</p>
         <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
           <a href="#contact" class="btn-primary">Start your journey →</a>
           <a href="#services" class="btn-outline">Explore services</a>
@@ -440,23 +441,24 @@
           </div>
         </div>
         <div class="contact-form">
-          <form id="inquiryForm" action="https://formspree.io/f/xknpkkzo" method="POST">
+          <!-- UPDATED: Added Formspree action endpoint and explicit names to inputs -->
+          <form id="inquiryForm" action="https://formspree.io/f/xyzkvpeg" method="POST">
             <div class="form-group">
-              <input type="text" name="Client Name" id="name" placeholder="Full name" required>
+              <input type="text" id="name" name="Client Name" placeholder="Full name" required>
             </div>
             <div class="form-group">
-              <input type="email" name="_replyto" id="email" placeholder="Email address" required>
+              <input type="email" id="email" name="_replyto" placeholder="Email address" required>
             </div>
             <div class="form-group">
-              <input type="tel" name="Phone Number" id="phone" placeholder="Phone number (optional)">
+              <input type="tel" id="phone" name="Phone Number" placeholder="Phone number (optional)">
             </div>
             <div class="form-group">
-              <textarea rows="3" name="Financial Goals" id="message" placeholder="Tell me about your financial goals... (e.g., retirement, child's education, extra income)" required></textarea>
+              <textarea rows="3" id="message" name="Financial Goals" placeholder="Tell me about your financial goals... (e.g., retirement, child's education, extra income)" required></textarea>
             </div>
-            <button type="submit" class="btn-primary" style="width: 100%; text-align: center;">Request callback →</button>
+            <button type="submit" id="submitBtn" class="btn-primary" style="width: 100%; text-align: center;">Request callback →</button>
             <p style="font-size: 0.75rem; margin-top: 0.8rem; color: #64748b; text-align: center;">🔒 Your data is confidential and only used to serve you better.</p>
           </form>
-          <div id="formFeedback" style="margin-top: 1rem; font-weight: 600; text-align: center;"></div>
+          <div id="formFeedback" style="margin-top: 1rem; color: #166534; font-weight: 600; text-align: center;"></div>
         </div>
       </div>
     </div>
@@ -473,52 +475,66 @@
 <script>
   const form = document.getElementById('inquiryForm');
   const feedbackDiv = document.getElementById('formFeedback');
+  const submitBtn = document.getElementById('submitBtn');
 
   form.addEventListener('submit', function(e) {
     e.preventDefault();
     
     const name = document.getElementById('name').value.trim();
     const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
     const message = document.getElementById('message').value.trim();
-    
+
+    // Field validations
     if(!name || !email || !message) {
       feedbackDiv.innerHTML = '⚠️ Please fill in all required fields (name, email, message).';
       feedbackDiv.style.color = '#b91c1c';
       return;
     }
-    
     if(!email.includes('@') || !email.includes('.')) {
       feedbackDiv.innerHTML = '⚠️ Please enter a valid email address.';
       feedbackDiv.style.color = '#b91c1c';
       return;
     }
 
-    feedbackDiv.innerHTML = '⏳ Sending your request...';
-    feedbackDiv.style.color = '#002855';
+    // Change button status during processing
+    submitBtn.innerText = 'Sending request...';
+    submitBtn.disabled = true;
+    feedbackDiv.innerHTML = '';
 
-    // Capturing form submission and dispatching safely via Fetch API
-    const data = new FormData(form);
+    // Prepare JSON data transmission to Formspree backend
+    const formData = {
+      "Client Name": name,
+      "_replyto": email,
+      "Phone Number": phone || "Not provided",
+      "Financial Goals": message
+    };
+
     fetch(form.action, {
-      method: form.method,
-      body: data,
+      method: 'POST',
+      body: JSON.stringify(formData),
       headers: {
-        'Accept': 'application/json'
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
       }
-    }).then(response => {
+    })
+    .then(response => {
       if (response.ok) {
-        feedbackDiv.innerHTML = `✅ Thanks ${name}! Your details have been sent. I'll review your goals and get back to you within 24 hours.`;
-        feedbackDiv.style.color = '#166534';
+        feedbackDiv.innerHTML = `✅ Thanks ${name}! Your details have been sent to Beng See. I'll get back to you within 24 hours.`;
+        feedbackDiv.style.color = '#e11b22';
         form.reset();
       } else {
-        throw new Error('Network error');
+        throw new Error('Form submission failed.');
       }
-    }).catch(error => {
-      feedbackDiv.innerHTML = '⚠️ Oops! There was a problem submitting your form. Please try again or WhatsApp directly.';
+    })
+    .catch(error => {
+      feedbackDiv.innerHTML = '❌ Server connection issue. Please email directly to wealth.growth.partner@outlook.com.';
       feedbackDiv.style.color = '#b91c1c';
-    }).finally(() => {
-      setTimeout(() => {
-        feedbackDiv.innerHTML = '';
-      }, 6000);
+    })
+    .finally(() => {
+      // Restore button status
+      submitBtn.innerText = 'Request callback →';
+      submitBtn.disabled = false;
     });
   });
 </script>
