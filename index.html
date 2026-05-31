@@ -172,7 +172,6 @@
       border: none;
       line-height: 1.5;
     }
-    /* New styling class to match header secondary text */
     .badge-secondary {
       color: #002855;
       opacity: 0.9;
@@ -345,7 +344,7 @@
         </span>
         <h2>Grow your wealth <br>with trusted guidance</h2>
         <p style="font-size: 1.1rem; margin: 1.2rem 0 1.8rem 0; max-width: 90%; color: #475569;">Professional service for Malaysians to build resilient financial future via unit trust investments and PRS tailored to your goals — whether saving for retirement, education, or passive income.</p>
-	<p>Your Goals, Our Focus</p>
+        <p style="font-weight: 600; color: #002855; margin-bottom: 1.5rem;">Your Goals, Our Focus</p>
         <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
           <a href="#contact" class="btn-primary">Start your journey →</a>
           <a href="#services" class="btn-outline">Explore services</a>
@@ -441,23 +440,23 @@
           </div>
         </div>
         <div class="contact-form">
-          <form id="inquiryForm" action="#" method="post">
+          <form id="inquiryForm" action="https://formspree.io/f/xknpkkzo" method="POST">
             <div class="form-group">
-              <input type="text" id="name" placeholder="Full name" required>
+              <input type="text" name="Client Name" id="name" placeholder="Full name" required>
             </div>
             <div class="form-group">
-              <input type="email" id="email" placeholder="Email address" required>
+              <input type="email" name="_replyto" id="email" placeholder="Email address" required>
             </div>
             <div class="form-group">
-              <input type="tel" id="phone" placeholder="Phone number (optional)">
+              <input type="tel" name="Phone Number" id="phone" placeholder="Phone number (optional)">
             </div>
             <div class="form-group">
-              <textarea rows="3" id="message" placeholder="Tell me about your financial goals... (e.g., retirement, child's education, extra income)" required></textarea>
+              <textarea rows="3" name="Financial Goals" id="message" placeholder="Tell me about your financial goals... (e.g., retirement, child's education, extra income)" required></textarea>
             </div>
             <button type="submit" class="btn-primary" style="width: 100%; text-align: center;">Request callback →</button>
             <p style="font-size: 0.75rem; margin-top: 0.8rem; color: #64748b; text-align: center;">🔒 Your data is confidential and only used to serve you better.</p>
           </form>
-          <div id="formFeedback" style="margin-top: 1rem; color: #166534; font-weight: 600; text-align: center;"></div>
+          <div id="formFeedback" style="margin-top: 1rem; font-weight: 600; text-align: center;"></div>
         </div>
       </div>
     </div>
@@ -474,30 +473,53 @@
 <script>
   const form = document.getElementById('inquiryForm');
   const feedbackDiv = document.getElementById('formFeedback');
+
   form.addEventListener('submit', function(e) {
     e.preventDefault();
+    
     const name = document.getElementById('name').value.trim();
     const email = document.getElementById('email').value.trim();
     const message = document.getElementById('message').value.trim();
+    
     if(!name || !email || !message) {
       feedbackDiv.innerHTML = '⚠️ Please fill in all required fields (name, email, message).';
       feedbackDiv.style.color = '#b91c1c';
-      setTimeout(() => { feedbackDiv.innerHTML = ''; }, 3000);
-      return;
-    }
-    if(!email.includes('@') || !email.includes('.')) {
-      feedbackDiv.innerHTML = '⚠️ Please enter a valid email address.';
-      feedbackDiv.style.color = '#b91c1c';
-      setTimeout(() => { feedbackDiv.innerHTML = ''; }, 3000);
       return;
     }
     
-    feedbackDiv.innerHTML = `✅ Thanks ${name}! I'll review your message and get back to you within 24 hours.`;
-    feedbackDiv.style.color = '#e11b22';
-    form.reset();
-    setTimeout(() => {
-      feedbackDiv.innerHTML = '';
-    }, 5000);
+    if(!email.includes('@') || !email.includes('.')) {
+      feedbackDiv.innerHTML = '⚠️ Please enter a valid email address.';
+      feedbackDiv.style.color = '#b91c1c';
+      return;
+    }
+
+    feedbackDiv.innerHTML = '⏳ Sending your request...';
+    feedbackDiv.style.color = '#002855';
+
+    // Capturing form submission and dispatching safely via Fetch API
+    const data = new FormData(form);
+    fetch(form.action, {
+      method: form.method,
+      body: data,
+      headers: {
+        'Accept': 'application/json'
+      }
+    }).then(response => {
+      if (response.ok) {
+        feedbackDiv.innerHTML = `✅ Thanks ${name}! Your details have been sent. I'll review your goals and get back to you within 24 hours.`;
+        feedbackDiv.style.color = '#166534';
+        form.reset();
+      } else {
+        throw new Error('Network error');
+      }
+    }).catch(error => {
+      feedbackDiv.innerHTML = '⚠️ Oops! There was a problem submitting your form. Please try again or WhatsApp directly.';
+      feedbackDiv.style.color = '#b91c1c';
+    }).finally(() => {
+      setTimeout(() => {
+        feedbackDiv.innerHTML = '';
+      }, 6000);
+    });
   });
 </script>
 </body>
