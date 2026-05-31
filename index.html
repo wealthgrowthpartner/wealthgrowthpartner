@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Public Mutual Consultant | Beng See, Lim</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f8fafc;
+      color: #1e293b;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* header & nav */
+    header {
+      background: white;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(2px);
+      background: rgba(255,255,255,0.96);
+      border-bottom: 3px solid #e11b22; /* Public Mutual Red Accent Line */
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 0;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .pmo-logo {
+      height: 50px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .logo h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #002855; /* Corporate Navy */
+      letter-spacing: -0.5px;
+      line-height: 1.2;
+    }
+    .logo p {
+      font-size: 0.75rem;
+      color: #002855; /* Corporate Navy - Matches the h1 above */
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-top: 2px;
+      opacity: 0.9; /* Slight styling separation without altering core hue */
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 600;
+      color: #334155;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover {
+      color: #e11b22;
+    }
+
+    /* buttons */
+    .btn-primary {
+      background-color: #e11b22;
+      color: white;
+      padding: 0.7rem 1.5rem;
+      border-radius: 4px; 
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-block;
+      transition: background 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-primary:hover {
+      background-color: #b71218;
+    }
+    .btn-outline {
+      border: 1.5px solid #002855;
+      background: transparent;
+      color: #002855;
+      padding: 0.65rem 1.5rem;
+      border-radius: 4px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+    .btn-outline:hover {
+      background: #00285510;
+      color: #e11b22;
+      border-color: #e11b22;
+    }
+
+    /* sections */
+    section {
+      padding: 5rem 0;
+    }
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      color: #002855;
+      position: relative;
+      display: inline-block;
+    }
+    .section-title:after {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 3px;
+      background: #e11b22;
+      margin-top: 8px;
+    }
+
+    /* hero */
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+    .hero-content {
+      flex: 1;
+    }
+    .hero-content h2 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      line-height: 1.2;
+      color: #002855;
+    }
+    .hero-badge {
+      background: transparent;
+      color: #e11b22;
+      display: inline-block;
+      padding: 0.5rem 0;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      border: none;
+      line-height: 1.5;
+    }
+    /* New styling class to match header secondary text */
+    .badge-secondary {
+      color: #002855;
+      opacity: 0.9;
+    }
+    .hero-image {
+      flex: 0.8;
+      text-align: center;
+    }
+    .hero-image img {
+      max-width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+    }
+
+    /* services grid */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+    .service-card {
+      background: white;
+      padding: 1.8rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+      border: 1px solid #e2e8f0;
+      border-top: 4px solid #002855;
+      transition: 0.2s;
+    }
+    .service-card:hover {
+      border-color: #cbd5e1;
+      border-top-color: #e11b22;
+      transform: translateY(-4px);
+    }
+    .service-icon {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+    }
+    .service-card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 0.75rem;
+      color: #002855;
+    }
+
+    /* portfolio / funds row */
+    .funds-showcase {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.8rem;
+      justify-content: center;
+    }
+    .fund-item {
+      background: white;
+      border-radius: 8px;
+      padding: 1.5rem;
+      flex: 1;
+      min-width: 220px;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+      border: 1px solid #e2e8f0;
+      text-align: center;
+      transition: border-color 0.2s;
+    }
+    .fund-item:hover {
+      border-color: #e11b22;
+    }
+    .fund-item h4 {
+      font-size: 1.3rem;
+      color: #002855;
+      margin-bottom: 0.5rem;
+    }
+    .badge {
+      background: #f1f5f9;
+      color: #475569;
+      padding: 0.2rem 0.8rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      display: inline-block;
+    }
+
+    /* contact + form */
+    .contact-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      background: white;
+      border-radius: 8px;
+      padding: 2.5rem;
+      box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
+      border: 1px solid #e2e8f0;
+    }
+    .contact-info {
+      flex: 1;
+    }
+    .contact-info h3 {
+      color: #002855;
+    }
+    .contact-form {
+      flex: 1;
+    }
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border-radius: 4px;
+      border: 1px solid #cbd5e1;
+      font-family: inherit;
+    }
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: #e11b22;
+      box-shadow: 0 0 0 3px rgba(225, 27, 34, 0.1);
+    }
+    textarea {
+      resize: vertical;
+    }
+    footer {
+      background: #001833;
+      color: #94a3b8;
+      text-align: center;
+      padding: 2.5rem 2rem;
+      font-size: 0.85rem;
+      border-top: 4px solid #e11b22;
+    }
+    @media (max-width: 750px) {
+      .hero-content h2 {
+        font-size: 2rem;
+      }
+      .nav-links {
+        gap: 1rem;
+      }
+      section {
+        padding: 3rem 0;
+      }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="container">
+    <nav>
+      <div class="logo-container">
+        <img src="pmowhite.png" alt="PMO Plus Logo" class="pmo-logo">
+        <div class="logo">
+          <h1>LIM BENG SEE</h1>
+          <p>Unit Trust & PRS Consultant</p>
+        </div>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#portfolio">Funds</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a href="#contact" class="btn-primary" style="padding:0.5rem 1.2rem;">Get Advice</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section id="home">
+    <div class="container hero">
+      <div class="hero-content">
+        <span class="hero-badge">
+          🛡️ Licensed by Public Mutual Berhad<br>
+          <span class="badge-secondary">🪪 UTC:11649645 | FIMM:F02094902</span>
+        </span>
+        <h2>Grow your wealth <br>with trusted guidance</h2>
+        <p style="font-size: 1.1rem; margin: 1.2rem 0 1.8rem 0; max-width: 90%; color: #475569;">Professional service for Malaysians to build resilient financial future via unit trust investments and PRS tailored to your goals — whether saving for retirement, education, or passive income.</p>
+	<p>Your Goals, Our Focus</p>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+          <a href="#contact" class="btn-primary">Start your journey →</a>
+          <a href="#services" class="btn-outline">Explore services</a>
+        </div>
+        <div style="margin-top: 2.5rem; display: flex; gap: 2rem; flex-wrap: wrap;">
+          <div><span style="font-weight:800; color: #e11b22; font-size: 1.5rem;">8+</span> <br><small style="color: #64748b; font-weight: 600;">years experience</small></div>
+          <div><span style="font-weight:800; color: #e11b22; font-size: 1.5rem;">RM50M+</span> <br><small style="color: #64748b; font-weight: 600;">assets advised</small></div>
+          <div><span style="font-weight:800; color: #e11b22; font-size: 1.5rem;">500+</span> <br><small style="color: #64748b; font-weight: 600;">happy clients</small></div>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img src="https://placehold.co/500x400/002855/ffffff?text=Public+Mutual+Wealth" alt="Financial consultant illustration">
+      </div>
+    </div>
+  </section>
+
+  <section id="services" style="background: #f1f5f9;">
+    <div class="container">
+      <h2 class="section-title">What I offer</h2>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">📊</div>
+          <h3>Personalised Portfolio</h3>
+          <p style="color: #475569;">Tailored unit trust selection based on your risk profile, time horizon & financial aspirations.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🎓</div>
+          <h3>Education & Retirement</h3>
+          <p style="color: #475569;">Systematic investment plans for children's education or comfortable retirement years.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">📈</div>
+          <h3>Wealth Maximisation</h3>
+          <p style="color: #475569;">Active review and switching strategies to capture market opportunities and protect gains.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🛡️</div>
+          <h3>Risk Management</h3>
+          <p style="color: #475569;">Diversification & rebalancing advice to manage volatility in equity/ bond markets.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="portfolio">
+    <div class="container">
+      <h2 class="section-title">Featured Public Mutual Funds</h2>
+      <p style="margin-bottom: 2rem; color: #475569;">A selection of top-performing and well-diversified funds I regularly recommend.</p>
+      <div class="funds-showcase">
+        <div class="fund-item">
+          <h4>Public Islamic Equity Fund</h4>
+          <span class="badge" style="background: #f0fdf4; color: #166534;">⭐ Shariah-compliant</span>
+          <p style="margin-top: 0.8rem; color: #475569;">Long-term capital growth via Islamic equities.</p>
+        </div>
+        <div class="fund-item">
+          <h4>Public Balanced Fund</h4>
+          <span class="badge" style="background: #fff7ed; color: #9a3412;">⚖️ Moderate risk</span>
+          <p style="margin-top: 0.8rem; color: #475569;">Mix of equities & fixed income for steady growth.</p>
+        </div>
+        <div class="fund-item">
+          <h4>Public Money Market Fund</h4>
+          <span class="badge" style="background: #f0f9ff; color: #075985;">💰 Liquid & stable</span>
+          <p style="margin-top: 0.8rem; color: #475569;">Park emergency savings with competitive returns.</p>
+        </div>
+        <div class="fund-item">
+          <h4>Public Global Select Fund</h4>
+          <span class="badge" style="background: #faf5ff; color: #6b21a8;">🌍 International exposure</span>
+          <p style="margin-top: 0.8rem; color: #475569;">Diversified across global developed markets.</p>
+        </div>
+      </div>
+      <div style="text-align: center; margin-top: 2.5rem;">
+        <p style="margin-bottom: 1.5rem; font-size: 0.9rem; color: #64748b;">📌 *Past performance does not guarantee future results. I provide professional advice to match your risk tolerance.</p>
+        <a href="#contact" class="btn-primary">Request fund factsheet & proposal</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" style="background: #f1f5f9;">
+    <div class="container">
+      <h2 class="section-title">Let’s plan your financial future</h2>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h3 style="font-size: 1.6rem; margin-bottom: 1rem;">Get in touch</h3>
+          <p style="margin-bottom: 1.5rem; color: #475569;">Free initial consultation to understand your goals. No obligation, just clarity.</p>
+          <ul style="list-style: none; line-height: 2.2; color: #334155;">
+            <li>📞 <strong>Call / WhatsApp:</strong> +60 16-521 4951</li>
+            <li>📧 <strong>Email:</strong> wealth.growth.partner@outlook.com</li>
+            <li>📍 <strong>Service area:</strong> Kuala Lumpur, Selangor & online nationwide</li>
+          </ul>
+          <div style="margin-top: 1.8rem; border-top: 1px solid #e2e8f0; padding-top: 1.5rem;">
+            <p style="color: #334155;"><strong>🕒 Office hours:</strong> Mon-Fri 9am–6pm | Sat 9am–1pm</p>
+            <p style="margin-top: 0.5rem;"><small style="color: #64748b;">Public Mutual licensed consultant. Your trusted partner since 2015.</small></p>
+          </div>
+        </div>
+        <div class="contact-form">
+          <form id="inquiryForm" action="#" method="post">
+            <div class="form-group">
+              <input type="text" id="name" placeholder="Full name" required>
+            </div>
+            <div class="form-group">
+              <input type="email" id="email" placeholder="Email address" required>
+            </div>
+            <div class="form-group">
+              <input type="tel" id="phone" placeholder="Phone number (optional)">
+            </div>
+            <div class="form-group">
+              <textarea rows="3" id="message" placeholder="Tell me about your financial goals... (e.g., retirement, child's education, extra income)" required></textarea>
+            </div>
+            <button type="submit" class="btn-primary" style="width: 100%; text-align: center;">Request callback →</button>
+            <p style="font-size: 0.75rem; margin-top: 0.8rem; color: #64748b; text-align: center;">🔒 Your data is confidential and only used to serve you better.</p>
+          </form>
+          <div id="formFeedback" style="margin-top: 1rem; color: #166534; font-weight: 600; text-align: center;"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <p>© 2026 Lim Beng See – Public Mutual Unit Trust Consultant (Licensed by FIMM). All rights reserved.</p>
+    <p style="margin-top: 0.8rem; font-size: 0.75rem; color: #64748b; line-height: 1.6;">Disclaimer: This website is an independent consultant profile for informational purposes and does not represent the official website of Public Mutual Berhad. It does not constitute an offer to sell or buy units. Please refer to official prospectuses before investing.</p>
+  </div>
+</footer>
+
+<script>
+  const form = document.getElementById('inquiryForm');
+  const feedbackDiv = document.getElementById('formFeedback');
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+    if(!name || !email || !message) {
+      feedbackDiv.innerHTML = '⚠️ Please fill in all required fields (name, email, message).';
+      feedbackDiv.style.color = '#b91c1c';
+      setTimeout(() => { feedbackDiv.innerHTML = ''; }, 3000);
+      return;
+    }
+    if(!email.includes('@') || !email.includes('.')) {
+      feedbackDiv.innerHTML = '⚠️ Please enter a valid email address.';
+      feedbackDiv.style.color = '#b91c1c';
+      setTimeout(() => { feedbackDiv.innerHTML = ''; }, 3000);
+      return;
+    }
+    
+    feedbackDiv.innerHTML = `✅ Thanks ${name}! I'll review your message and get back to you within 24 hours.`;
+    feedbackDiv.style.color = '#e11b22';
+    form.reset();
+    setTimeout(() => {
+      feedbackDiv.innerHTML = '';
+    }, 5000);
+  });
+</script>
+</body>
+</html>
